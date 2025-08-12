@@ -160,7 +160,7 @@ html, body {
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
-  /* background: white; */
+  background: rgb(177, 172, 172);
   border-radius: 40px;
   padding: 20px 10px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
@@ -330,7 +330,8 @@ html, body {
 .glow-scroll-track {
   display: flex;
   width: max-content;
-  animation: glow-scroll 30s linear infinite;
+  /* animation: glow-scroll 30s linear infinite; */
+  animation: linear infinite;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -350,7 +351,7 @@ html, body {
 .glow-scroll-track-1{
   display: flex;
   width: max-content;
-  animation: glow-scroll-1 30s linear infinite;
+  /* animation: glow-scroll-1 30s linear infinite; */
   margin-top: 10px;
   margin-bottom: 10px;
 }
