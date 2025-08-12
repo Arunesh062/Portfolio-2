@@ -243,7 +243,7 @@ Technologies Used: Python, Scikit-learn, OpenCV. </p>
 <!-- CODEING PLATFORMS -->
  
 
-<section id="resume" class="image-section">
+<!-- <section id="resume" class="image-section">
   <div class="section-heading">
     <h3>CODEING PLATFORMS</h3>
   </div>
@@ -257,7 +257,7 @@ Technologies Used: Python, Scikit-learn, OpenCV. </p>
         <div class="progress-text">
             <span class="solved">115</span>/<span class="total">3642</span>
             <div class="status">Solved</div>
-            <!-- <div class="attempting">4 Attempting</div> -->
+            <div class="attempting">4 Attempting</div>
         </div>
         <div class="platform-name">LeetCode</div>
     </div>
@@ -267,7 +267,69 @@ Technologies Used: Python, Scikit-learn, OpenCV. </p>
         <div class="stat hard">Hard<br><span>0/859</span></div>
     </div>
     </div> 
+</section> -->
+
+<section id="resume" class="image-section">
+  <div class="section-heading">
+    <h3>CODING PLATFORMS</h3>
+  </div>
+
+  <div class="stats-container">
+    <div class="progress-ring">
+      <svg class="progress-svg" width="150" height="150">
+        <circle class="bg" cx="75" cy="75" r="68" />
+        <circle class="progress" cx="75" cy="75" r="68" />
+      </svg>
+
+      <div class="progress-text">
+        <span class="solved">0</span>/<span class="total">0</span>
+        <div class="status">Solved</div>
+      </div>
+
+      <div class="platform-name">LeetCode</div>
+    </div>
+
+    <div class="side-stats">
+      <div class="stat easy">Easy<br><span>0</span></div>
+      <div class="stat medium">Med.<br><span>0</span></div>
+      <div class="stat hard">Hard<br><span>0</span></div>
+    </div>
+  </div>
+
+  <script>
+
+   async function fetchLeetCodeStats(username) {
+    try {
+        const res = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`);
+        const data = await res.json();
+
+        // Update solved count
+        document.querySelector(".solved").textContent = data.totalSolved;
+        document.querySelector(".total").textContent = data.totalQuestions;
+
+        // Update Easy, Medium, Hard stats
+        document.querySelector(".easy span").textContent = `${data.easySolved}/${data.totalEasy}`;
+        document.querySelector(".medium span").textContent = `${data.mediumSolved}/${data.totalMedium}`;
+        document.querySelector(".hard span").textContent = `${data.hardSolved}/${data.totalHard}`;
+
+        // Animate progress circle
+        const radius = 68;
+        const circumference = 2 * Math.PI * radius;
+        const offset = circumference - (data.totalSolved / data.totalQuestions) * circumference;
+        document.querySelector(".progress").style.strokeDashoffset = offset;
+    } catch (error) {
+        console.error("Error fetching LeetCode stats:", error);
+    }
+}
+
+// Call function with your username
+fetchLeetCodeStats("Arunesh_062");
+
+
+</script>
+
 </section>
+
 
 
 <!-- Contact Me -->
@@ -328,45 +390,7 @@ Technologies Used: Python, Scikit-learn, OpenCV. </p>
 <!-- js -->
 
 
-<script>
-const roles = [
-  // "Full Stack Developer",
-  "UI/UX Designer",
-  "Problem Solver"
-];
 
-let roleIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-const roleElement = document.getElementById("role");
-const typingSpeed = 100; // typing speed
-const deletingSpeed = 50; // deleting speed
-const delayBetweenWords = 1500; // wait before deleting
-
-function typeEffect() {
-  const currentRole = roles[roleIndex];
-  
-  if (!isDeleting && charIndex <= currentRole.length) {
-    roleElement.textContent = currentRole.substring(0, charIndex++);
-    if (charIndex > currentRole.length) {
-      isDeleting = true;
-      setTimeout(typeEffect, delayBetweenWords);
-      return;
-    }
-  }
-  else if (isDeleting && charIndex >= 0) {
-    roleElement.textContent = currentRole.substring(0, charIndex--);
-    if (charIndex < 0) {
-      isDeleting = false;
-      roleIndex = (roleIndex + 1) % roles.length;
-    }
-  }
-
-  setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
-}
-
-typeEffect();
-</script>
 
 </body>
 </html>
