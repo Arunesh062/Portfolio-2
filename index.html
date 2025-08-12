@@ -11,6 +11,7 @@
 <body>
 
   <!-- Homepage -->
+
   <section class="homepage" id="home">
     <div class="container">
       <div class="left-section">
@@ -388,7 +389,45 @@ fetchLeetCodeStats("Arunesh_062");
 </footer>
 
 <!-- js -->
+<script>
+const roles = [
+  // "Full Stack Developer",
+  "UI/UX Designer",
+  "Problem Solver"
+];
 
+let roleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const roleElement = document.getElementById("role");
+const typingSpeed = 100; // typing speed
+const deletingSpeed = 50; // deleting speed
+const delayBetweenWords = 1500; // wait before deleting
+
+function typeEffect() {
+  const currentRole = roles[roleIndex];
+  
+  if (!isDeleting && charIndex <= currentRole.length) {
+    roleElement.textContent = currentRole.substring(0, charIndex++);
+    if (charIndex > currentRole.length) {
+      isDeleting = true;
+      setTimeout(typeEffect, delayBetweenWords);
+      return;
+    }
+  }
+  else if (isDeleting && charIndex >= 0) {
+    roleElement.textContent = currentRole.substring(0, charIndex--);
+    if (charIndex < 0) {
+      isDeleting = false;
+      roleIndex = (roleIndex + 1) % roles.length;
+    }
+  }
+
+  setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
+}
+
+typeEffect();
+</script>
 
 
 
